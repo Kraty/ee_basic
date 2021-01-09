@@ -1,0 +1,25 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+
+    <servlet>
+        <servlet-name>Hi</servlet-name>
+        <servlet-class>com.waq.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Hi</servlet-name>
+        <url-pattern>/Hi</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ck</servlet-name>
+        <servlet-class>com.waq.servlet.CookieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ck</servlet-name>
+        <url-pattern>/ck</url-pattern>
+    </servlet-mapping>
+
+</web-app>
