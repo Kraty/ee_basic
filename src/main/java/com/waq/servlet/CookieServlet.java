@@ -16,6 +16,7 @@ public class CookieServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        // 设置编码
         req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html; utf-8");
         resp.setCharacterEncoding("utf-8");
@@ -23,6 +24,7 @@ public class CookieServlet extends HttpServlet {
         // 获取cookie信息
         Cookie[] cookies = req.getCookies();
 
+        // 判断cookie是否存在
         if (cookies != null && cookies.length > 1) {
 
             String uid = "";
@@ -36,11 +38,28 @@ public class CookieServlet extends HttpServlet {
                 } else {
 
                     UserService userService = new UserServiceImpl();
-                    resp.getWriter().write(uid);
-                    User user = userService.checkCookie(uid);
+                    User user;
+                    user = userService.checkCookie(uid);
+
                     if (user != null) {
+
+                        req.getSession().setAttribute("user",
+                                user);
+                        int nums;
+                        if (this.getServletContext().getAttribute("nums") != null) {
+
+                            nums = (int) this.getServletContext().getAttribute("nums");
+                            nums += 1;
+                            this.getServletContext().setAttribute("nums", nums);
+                            resp.getWriter().write(nums);
+
+                        } else {
+                            this.getServletContext().setAttribute("nums", 1);
+                        }
+
                         req.getRequestDispatcher("index.jsp").forward(req, resp);
                         return;
+
                     }
 
                 }
